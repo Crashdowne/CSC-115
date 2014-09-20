@@ -1,102 +1,82 @@
+/* Assignment 1
+ * CSC 115
+ * Bryan Kesteloo
+ * V00718963
+ * 
+ * Purpose:
+ * To create a fantasy baseball team by implementing classes
+ */
+
+
+
 public class Player
 {
 	private String name;
 	private int battingAvg;
 
-	// Purpose:
-	// 	Initialize this instance of Player
-	// 	set the battingAvg to be 0
-	//
+	// Creates an object of type player
 	public Player (String name)
 	{
-
+		this.name = name;
 	}
 
-	// Purpose:
-	//	Initialize this instance of Player
-	//
+	// Initialized the Player object
 	public Player (String name, int battingAvg)
 	{
-
-		
+		this.name = name;
+		this.battingAvg = battingAvg;
 	}
 
-	// Purpose:
-	// 	Change the name associated with this Player
-	// 	to be newname
-	//
+	// Sets the name for the player 
 	public void setName (String newName)
 	{
-
+		this.name = newName;
 	}
 
-	// Purpose:
-	//	Return the name associated with this Player
-	//
+	// Gets the player name
 	public String getName()
 	{
-		return "to implement";
+		return name;
 	}
 
-	// Purpose:
-	//	Change the battingAvg associated with this Player 
-	//	to be newbattingAvg
-	//	
+	// A setter for the batting average, takes in a new batting average
+	// Sets it to the private batting average
 	public void setBattingAvg (int newBattingAvg)
 	{
-
+		this.battingAvg = newBattingAvg;
 	}
 
-	// Purpose:
-	//	Return the battingAvg associated with this Player
-	//
+	// A getter for the batting average
 	public int getBattingAvg()
 	{
-        return -1;
+        return battingAvg;
 	}
 
-	// Purpose:
-	//	Compare this instance of Player to other
-	//	return true if they are the same.
-	//	
-	//	We consider two Players to be equal if
-	//	their name are the same.  We do NOT consider
-	//	the battingAvg.
-	//
-	// Pre-conditions:
-	//	other is not null
-	//
-	// Returns:
-	//	true	if this instance's name are the same as
-	//		other's name
-	//	false	otherwise
-	//
-	// Examples:
-	//
-	//	Player p = new Player("Derek Jeter", 265);
-	//	Player q = new Player("Derek Jeter", 300);
-	//	Player r = new Player("Jose Bautista", 400);
-	//	
-	//	p.equals(q)	- returns true
-	//	p.equals(r)	- returns false
+	// Checks to see if the name given is the same as a player passed in
 	public boolean equals (Player other)
 	{
-		return false;
+		// Makes sure there is a name
+		if (other != null)
+		{
+			// Checks the player names against each other
+			if (this.name.equals(other.name))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else 
+		{
+			return false;
+		}
 	}
 
-	// Purpose:
-	//	Return a String representation of this Player
-	// 
-	// Returns:
-	//	name: battingAvg
-	//	
-	// Examples:
-	// 	Player p = new Player("Derek Jeter", 265);
-	//	
-	//	p.toString() returns	Derek Jeter:265
-	//
+	// Prints out the name and batting average when called
 	public String toString()
 	{
-			return "to implement";
+			return this.name+":"+this.battingAvg;
 	}
 }

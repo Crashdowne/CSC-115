@@ -217,6 +217,8 @@ public class a1tester
 			PlayerListResizeTest();
 			PlayerListStressTest();
 			TeamTest();
+			
+			PlayerList a = new PlayerList();		
 		}
 		catch (Exception e)
 		{

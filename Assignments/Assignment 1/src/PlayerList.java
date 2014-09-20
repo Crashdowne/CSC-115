@@ -5,126 +5,99 @@ public class PlayerList
 	private Player[] storage;
 	private int count;
 
-	//
-	// Purpose:
-	//	Initialize a new instance of PlayerList
-    // of size INITIAL_SIZE and
-    // count initialized to 0
-	//
+	// Creates a new player list array called storage to a set size
 	public PlayerList()
 	{
-		
+		this.storage = new Player[INITIAL_SIZE];
+		this.count = 0;
 	}
-
-	//
-	// Purpose: 
-	// 	return the element at position index
-	//
-	// Pre-Conditions:
-	// 	for a PlayerList x:
-	//	index >= 0 AND
-	//	index < x.size()
-	//
-	// Examples:
-	//
-	// If x is {"Derek Jeter:300", "Jose Bautista:400", "Michael Saunders:250"} then:
-	//	x.get(0) returns "Derek Jeter:300"
-	//	x.get(1) returns "Jose Bautista:400"
-	//	the result of calling x.get(3) is undefined
-	//
+	
+	// Gets the player name from the storage array at a specific index
 	public Player get (int index)
 	{
-		// NOTE NOTE NOTE
-		// 
-		// This line needs to be removed.  It is only
-		// so the tester works.  You should NOT
-		// allocate a new PhoneNumber in this method
-		return new Player("WARNING fix this", -1);
+		return this.storage[index];
 	} 
 
-	//
-	// Purpose:
-	//	remove the element at position index
-	//
-	// Pre-Conditions:
-	//	for a PlayerList x:
-	//		index >= 0 AND
-	//		index < x.size()
-	//
-	// If x is {"Derek Jeter:300", "Jose Bautista:400", "Michael Saunders:250"} then
-	//	after x.remove(0), x is {"Jose Bautista:400", "Michael Saunders:250"}
-	//
+	// Removes a player at a specific index
 	public void remove (int index)
 	{
-
+		// If index is not included in the elements of the array
+		if (index >= count)
+		{
+			System.out.println("Index out of bounds");
+			return;
+		}
+		
+		// If not the last element
+		if (index != count-1)
+		{
+			
+			// Replace the element at given index by moving everything 
+			// behind it forward by one element
+			for (int i = index; i < count-1; i++)
+			{
+				storage[i] = storage[i+1];
+			}
+		}
+		
+		// Count gets decremented to account for the removal of an element / player
+		count --;
 	}
 
-	//
-	// Purpose:
-	//	return the number of elements in the list
-	//
-	// Returns:
-	//	the number of elements in the list
-	//
-	// Examples:
-	//
-	// If x is {"Jose Bautista:400", "Michael Saunders:250"}
-	//	x.size() returns 2
-	// If x is {}
-	//	x.size() returns 0
-	//
+	// Uses count to report the size of the team
 	public int size()
 	{
-		return -1;
+		return this.count;
 	}
 
-	// 
-	// Purpose:
-	//	add the player p to the list
-	//
-	// Comments:
-	//
-	//	The array you allocated to store Players might
-	//	get full, but you are still required to add this
-	//	Player (until the JVM runs out of memory!)
-	//	
-	//	This means that you should check to see if the array
-	//	is currently full.  If it is, allocate a new array
-	// 	that is twice as big, then copy the values over
-	//	and update the storage reference to be the new array
-	//	Finally, add the new Player.
-	//
+	// Adds players to the array, checks to see if the array is full
+	// Calls isArrayFull to determine if it is indeed full
+	// If it is full, calls the method to expand the array
+	// Adds a player to the position given by count
 	public void add (Player p)
 	{
-
+		if(this.isArrayFull())
+		{
+			this.expandArray();
+		}
+		storage[count] = p;
+		count += 1;
+	}
+	
+	// Checks to see if the array is full or not 
+	// If count is equal to the length of the storage array
+	private boolean isArrayFull()
+	{
+		return this.count == this.storage.length;
+	}
+	
+	// Creates a new array, copies the old contents into the new array
+	// Sets the memory pointer to the newly created array
+	private void expandArray()
+	{
+		Player[] expandedStorage = new Player[this.storage.length*2];
+		
+		for (int i = 0; i < count; i++)
+		{
+			expandedStorage[i] = storage[i];
+		}
+		
+		this.storage = expandedStorage;
 	}
 
-	//
-	// Purpose:
-	//	return the index where p is in the list, -1 otherwise
-	//
-	// Pre-Conditions:
-	//	none
-	//
-	// Returns:
-	//	true - if p is in the list
-	//	false - if p is not in the list
-	//
-	// Examples:
-	//	
-	// If x is {"Derek Jeter:300", "Jose Bautista:400", "Michael Saunders:250"} then
-	//
-	//	Player p = new Player("Derek Jeter");
-	//	Player q = new Player("Michael Saunders");
-	//	Player r = new Player("Nelson Cruz");
-	//	
-	// 	x.find(p) returns 0
-	//	x.find(q) returns 2
-	//	x.find(r) returns -1
-	//
+	// Compares the names of players in the array to see if there is a match
+	// Returns the position in the array of that player
+	// If that player does not exist, returns -1
 	public int find (Player p)
 	{
-		return -1;		
+		for (int i = 0; i < this.count; i++)
+		{
+			if (p.equals(this.storage[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }
