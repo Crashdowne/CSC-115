@@ -14,14 +14,14 @@ public class PlayerLinkedList implements PlayerList
 
 	public PlayerLinkedList()
 	{
-		this.head = null;
-		this.tail = null;
-		this.count = 0;
+		head = null;
+		tail = null;
+		count = 0;
 	}
 	
 	public boolean isListEmpty()
 	{
-		if(this.count == 0)
+		if(count == 0)
 		{
 			return true;
 		}
@@ -46,10 +46,7 @@ public class PlayerLinkedList implements PlayerList
 	}
 
 	public void addAt (Player p, int pos)
-	{
-		//isListEmpty();
-		//isBeginningOfList(pos);
-		
+	{	
 		if(pos < 0)
 		{
 			System.out.println("Position cannot be less than 0");
@@ -98,8 +95,8 @@ public class PlayerLinkedList implements PlayerList
 		PlayerNode newNode = new PlayerNode(p);
 		if(isListEmpty() == true)
 		{
-			tail = newNode;
 			head = newNode;
+			tail = newNode;
 			count++;
 		}
 
@@ -121,7 +118,7 @@ public class PlayerLinkedList implements PlayerList
 	{
 		PlayerNode currentNode = new PlayerNode();
 		currentNode = head;
-		for(int i=0; i<=pos; i++)
+		for(int i=0; i<pos; i++)
 		{
 			currentNode = currentNode.next;	
 		}
@@ -130,33 +127,36 @@ public class PlayerLinkedList implements PlayerList
 
 	public int find (Player p)
 	{
+		//PlayerNode newNode = new PlayerNode(p);
 		PlayerNode currentNode;
 		currentNode = head;
 		int index=0;
 		
-		for(int i=0; i<=count; i++)
-		{
-			currentNode = currentNode.next;
-			if(currentNode.equals(p))
+		for(int i=0; i<count; i++)
+		{			
+			if(currentNode.getPlayer().equals(p))
 			{
-				index = i;
+				return index;	
 			}
+			currentNode = currentNode.next;
+			
+			index++;
 		}
-		if(currentNode == null)
-		{
-			index = -1;
-		}
-		return index;
+		return -1;
 	}
 	 
 	public void clear()
 	{
-		this.head = null;
-		this.tail = null;
+		head = null;
+		tail = null;
+		this.count = 0;
 	}
 	
 	public void removeAt (int pos)
 	{
+		PlayerNode currentNode;
+		currentNode = this.head;
+		
 		if(pos < 0)
 		{
 			System.out.println("Position cannot be less than 0");
@@ -168,16 +168,29 @@ public class PlayerLinkedList implements PlayerList
 			System.out.println("Position cannot be greater than equal to "+count);
 			return;
 		}
-
-		PlayerNode currentNode;
-		currentNode = head;
 		
-		for(int i=0; i<pos-1; i++)
+		if(count == 1)
 		{
-			currentNode = currentNode.next.next;
+			clear();
 		}
 		
-		count--;
+		if(pos == 0)
+		{
+			
+			this.count--;
+		}
+		
+		if(pos > 0)
+		{
+			for(int i=0; i<pos-1; i++)
+			{
+				currentNode = currentNode.next;
+			}
+			currentNode.next = currentNode.next.next;
+			this.count--;
+		}
+		
+		
 	}
 	 
 	public void remove (Player p)
@@ -187,14 +200,20 @@ public class PlayerLinkedList implements PlayerList
 		
 		for(int i=0; i<count; i++)
 		{
-			
+			if(p.equals(currentNode))
+			{
+				currentNode.next = currentNode.next.next;
+			}
+			currentNode = currentNode.next;
 		}
+		count--;
 
 	}
 
 	public String toString()
 	{
-		PlayerNode currentNode = head;
+		PlayerNode currentNode;
+		currentNode = head;
 		int index=0;
 		String s = "{";
 		
@@ -203,14 +222,15 @@ public class PlayerLinkedList implements PlayerList
 			return "{}";
 		}
 		s+=currentNode.getPlayer().toString();
+		
 		while(currentNode.next != null)
 		{
 			if(index < count)
 			{
 				s+=",";
-			}
+			}	
 			currentNode = currentNode.next;
-			s+=currentNode.getPlayer().toString();	
+			s+=currentNode.getPlayer().toString();
 			index++;
 		}
 		
@@ -242,7 +262,7 @@ public class PlayerLinkedList implements PlayerList
 		
 		l.clear();
 		System.out.println(l);
-		System.out.println();	
+		System.out.println();
 		
 		l.addAt(new Player("one"),0);
 		l.addAt(new Player("two"),0);

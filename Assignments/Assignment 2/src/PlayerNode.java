@@ -74,11 +74,6 @@ public class PlayerNode
 	public void setPlayer (Player p)
 	{
 		this.p = p;
-	}
-	
-	public String toString()
-	{
-		return "player";
-	}
+	}	
 }
 

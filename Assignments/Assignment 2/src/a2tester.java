@@ -267,7 +267,7 @@ public class a2tester
 		
 		l.removeAt(2);
 		//System.out.println(l);
-		displayResults (l.size() == 5);	
+		displayResults (l.size() == 5);
 		displayResults (l.toString().equals("{first:0,second:0,fourth:0,fifth:0,sixth:0}"));
 		
 		l.removeAt(4);
@@ -276,7 +276,7 @@ public class a2tester
 		displayResults (l.toString().equals("{first:0,second:0,fourth:0,fifth:0}"));	
 		
 		l.removeAt(0);
-		//System.out.println(l);
+		System.out.println(l);
 		displayResults (l.size() == 3);	
 		displayResults (l.toString().equals("{second:0,fourth:0,fifth:0}"));
 			
