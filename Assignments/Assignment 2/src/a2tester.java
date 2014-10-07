@@ -276,7 +276,7 @@ public class a2tester
 		displayResults (l.toString().equals("{first:0,second:0,fourth:0,fifth:0}"));	
 		
 		l.removeAt(0);
-		System.out.println(l);
+		//System.out.println(l);
 		displayResults (l.size() == 3);	
 		displayResults (l.toString().equals("{second:0,fourth:0,fifth:0}"));
 			
@@ -311,7 +311,7 @@ public class a2tester
 		Player pfound = new Player("second");
 		l.remove(pfound);
 		displayResults (l.size() == 5);	
-		//System.out.println(l);
+		System.out.println(l);
 		displayResults (l.toString().equals("{first:0,third:0,first:0,first:0,sixth:0}"));
 		
 		
