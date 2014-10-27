@@ -5,11 +5,11 @@
  * Calculates results based on prefixes and numbers given from the command line
  */
 
-public class PrefixCalculator 
+public class PrefixCalc 
 {
 	public static void main(String args[]) throws StackEmptyException, NumberFormatException
 	{
-		PrefixCalculator calc = new PrefixCalculator();
+		PrefixCalc calc = new PrefixCalc();
 		calc.calculator(args);	
 	}
 	
