@@ -1,5 +1,7 @@
 public class LLStack<T>{
+	
 	private Node head;
+	
 	public LLStack(){
 		head = null;
 	}
