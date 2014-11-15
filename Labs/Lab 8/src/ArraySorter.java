@@ -108,38 +108,44 @@ public class ArraySorter{
          the pivot is in its final position. This is called the partition operation.
       3. Recursively sort the sub-list of lesser elements and the sub-list of greater elements.
 	*/
-	public void  quickSort(int [] array, int lo, int hi){
-		
-		//Doesn't quite work...
-		
+	public void  quickSort(int [] array, int lo, int hi)
+	{
 		int i = lo;
-		//pivot value
-		int pivot = hi;
-
-		//int middle = (lo+hi)/2; //guess at pivot index
+		int j = hi;
+		int middle = (lo+hi)/2; //guess at pivot index
+		int pivot = array[middle];
 		
-		while(i < pivot)
+		while(i<=j)
 		{
-			if(array[i] > array[pivot])
-			{
-				int temp = array[pivot];
-				array[pivot] = array[i];
-				array[i] = array[pivot-1];
-				array[pivot-1] = temp;
-				pivot--;
-			}
-			else
+			while(array[i] < pivot)
 			{
 				i++;
 			}
+			
+			while(array[j] > pivot)
+			{
+				j--;
+			}
+			
+			if(i <= j)
+			{
+				int temp = array[j];
+				array[j] = array[i];
+				array[i] = temp;
+				
+				i++;
+				j--;
+			}
 		}
-		if(lo < pivot-1)
+		
+		if(lo < j)
 		{
-			quickSort(array, lo, pivot-1);
+			quickSort(array, lo, j);
 		}
-		if(pivot+1 < hi)
+		
+		if(i < hi)
 		{
-			quickSort(array, pivot+1, hi);
+			quickSort(array, i, hi);
 		}
 	}
 		
