@@ -1,5 +1,11 @@
+/*
+ * Player
+ * Bryan Kesteloo
+ * V00178963
+ * 
+ */
 public class Player implements Comparable<Player>
-{
+{	
 	private String name;
 	private String position; //positions: 1B 2B 3B LF RF CF SS C P
 
@@ -104,6 +110,6 @@ public class Player implements Comparable<Player>
 	//	
 	public int compareTo(Player other)
 	{
-		return -1;  //fix this...
+		return name.compareTo(other.getName());
 	}
 }

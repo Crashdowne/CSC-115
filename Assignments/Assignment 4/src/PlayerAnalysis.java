@@ -1,34 +1,37 @@
+/*
+ * PlayerAnalysis
+ * Bryan Kesteloo
+ * V00178963
+ * 
+ */
 import java.util.*;
 import java.io.*;
 
 //This class consists exclusively of static methods that operate on or return 
 //Lists of type Player and/or it subclasses. 
 
-public class PlayerAnalysis{
-
-	
+public class PlayerAnalysis
+{
 	// PURPOSE:
 	//	Given an empty list of type Fielder, and a filename of a file 
 	//	containing Fielder statistical data, this method populates
 	//  the list with a new Fielder object for every entry in the data file.
 	// 	At the end of this method, l is a List of Fielder objects
 	// 	sorted by name.
-	public static void populateFielderList(List<Fielder> l, String filename) {
-	
+	public static void populateFielderList(List<Fielder> l, String filename) 
+	{
 		try{
 			File myFile = new File(filename);
 			Scanner myScan = new Scanner(myFile);
-
 			myScan.nextLine(); //consume headerline of text
-		
 			//player data fields
 			String name;
 			String position;
 			int atBats;
 			int hits;
 			int bAvg;
-
-			while(myScan.hasNextLine()) {
+			while(myScan.hasNextLine()) 	
+			{
 				name = (myScan.next() + " " + myScan.next());//get last name and first initial
 				myScan.next(); //skip team
 				position = myScan.next();
@@ -38,40 +41,42 @@ public class PlayerAnalysis{
 				hits = myScan.nextInt();
 				myScan.nextLine(); //skip to nextline
 				bAvg = (int)((double)hits/atBats*1000);
-			
-				//need to create a new Fielder from above data 
-				//add it to the list
+				// Creates new Fielder objects including name, position and bAvg
+				Fielder fielder = new Fielder(name, position, bAvg); 
+				// Adds the fielder object to the list
+				l.add(fielder);
 			}
 			
-		}catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) 
+		
+		{
 			System.out.println("File not Found " + e);
 			System.exit(0);
 		}
-		
-		// remember -- you can print your list with  
-		// ListOperations.printList(l) for testing purposes
-		// make sure you sort them alphabetically by name
-		
+		// Uses Collections to sort Fielders by name
+		Collections.sort(l, new Comparator<Fielder>() 
+				{
+	        public int compare(final Fielder object1, final Fielder object2) 
+	        	{
+	            return object1.getName().compareTo(object2.getName());
+	        	}
+	       } );
 	}
-	
 	// PURPOSE:
 	//	Given an empty List of type Pitcher, and a filename of a file 
 	//	containing Pitcher statistical data, this method populates
 	//  the list with a new Fielder object for every entry in the data file.
 	// 	At the end of this method, l is a List of Pitcher objects
 	// 	sorted by name.
-	public static void populatePitcherList(List<Pitcher> l, String filename) {
-	
-		try{
-			
+	public static void populatePitcherList(List<Pitcher> l, String filename) 
+	{
+		try
+		{
 			File myFile = new File(filename);
 			Scanner myScan = new Scanner(myFile);
-
 			myScan.nextLine(); //consume headerline of text
-		
 			String name;
 			float era;
-			
 			while(myScan.hasNextLine()) {
 				name = (myScan.next() + " " + myScan.next());
 				myScan.next(); //skip team
@@ -79,23 +84,32 @@ public class PlayerAnalysis{
 				myScan.next(); //skip L
 				era = myScan.nextFloat();
 				myScan.nextLine(); //skip to nextline
-			
-				//need to create a new Pitcher from above data 
-				//add it to the list
+				// Creates new Pitcher objects
+				Pitcher pitcher = new Pitcher(name, era);
+				//Adds them to the list of Pitchers
+				l.add(pitcher);
 			}
 	
-		}catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) 
+		{
 			System.out.println("File not Found " + e);
 			System.exit(0);
 		}
 		
-		//make sure you sort them alphabetically by name
+		// Uses Collections to sort Pitchers by name
+		Collections.sort(l, new Comparator<Pitcher>() 
+				{
+	        public int compare(final Pitcher object1, final Pitcher object2) 
+	        	{
+	            return object1.getName().compareTo(object2.getName());
+	        	}
+	       } );
 	}
 
 	
 	// PURPOSE:
 	//	Given a list of type Fielder and a list of type  
-	//	Player, combines the elements of this into one 
+	//	Player, combine the elements of this into one 
 	// 	list of type Player that is sorted alphabetically 
 	//	by Player name
 	// 
@@ -103,12 +117,26 @@ public class PlayerAnalysis{
 	// 	an alphabetized List of Players
 	public static List<Player> makeAlphaDraftList(List<Fielder> f, List<Pitcher> p) {
 
-		return null;
+		// Creates a new linked list to hold Players
+		List<Player> l = new LinkedList<Player>();
+		// Adds all Fielders to the list
+		l.addAll(f);
+		//Adds all Pitchers to the list
+		l.addAll(p);
+		// Uses Collections to sort the list by name
+		Collections.sort(l, new Comparator<Player>() 
+				{
+	        public int compare(final Player object1, final Player object2) 
+	        	{
+	            return object1.getName().compareTo(object2.getName());
+	        	}
+	       } );
+		return l;
 	}
 	
 	// PURPOSE:
 	//	Given a list of type Fielder and a list of type Player, 
-	//	combines the elements of these lists into one list of type Player 
+	//	combine the elements of these lists into one list of type Player 
 	// 	with 3 of each type of Fielder position and 10 Pitchers. 
 	//
 	//	Fielders placed on the list have the highest 
@@ -162,10 +190,62 @@ public class PlayerAnalysis{
 		Lester, J:		P	ERA:2.46
 		Richards, G:	P	ERA:2.61
 	*/
-	public static List<Player> makeShortDraftList(List<Fielder> f, List<Pitcher> p)  {
-
-		return null;	
+	public static List<Player> makeShortDraftList(List<Fielder> f, List<Pitcher> p)  
+	{
+		// Creates a new linked list to hold the players
+		List<Player> l = new LinkedList<Player>();
+		// Uses Collections to sort Fielders battingAverage
+		Collections.sort(f, new Comparator<Fielder>() 
+			{
+	        public int compare(final Fielder object1, final Fielder object2) 
+	        	{
+	        	//Inverts the sort
+	            return Integer.compare(object1.getBattingAvg(), object2.getBattingAvg()) * -1;
+	        	}
+	       } );
+		
+		// Uses Collections to sort Pitchers by ERA
+		Collections.sort(p, new Comparator<Pitcher>() 
+			{
+	        public int compare(final Pitcher object1, final Pitcher object2) 
+	        	{
+	            return Float.compare(object1.getERA(), object2.getERA());
+	        	}
+	       } );
+		
+		// Uses a String array to sort the Pitchers into their respective positions
+		String[] positions = { "1B", "2B", "3B", "C", "CF" ,"LF", "RF", "SS" };
+		for(int i=0; i < positions.length; i++)
+		{
+			int count = 0;
+			for(int j=0; j < f.size(); j++)
+			{
+				if(f.get(j).getPosition().compareToIgnoreCase(positions[i]) == 0)
+				{
+					l.add(f.get(j));
+					count++;
+					
+					if(count == 3)
+					{
+						break;
+					}
+				}
+			}
+		}
+		
+		// Adds the first 10 Pitchers from the list
+		int count = 0;
+		for(int k=0; k < p.size(); k++)
+		{
+			l.add(p.get(k));
+			count ++;
+			
+			if(count == 10)
+			{
+				break;
+			}
+		}
+		
+		return l;	
 	}
-
-
 }

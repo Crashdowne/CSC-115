@@ -1,3 +1,9 @@
+/*
+ * Pitcher
+ * Bryan Kesteloo
+ * V00178963
+ * 
+ */
 public class Pitcher extends Player
 {
 
@@ -40,5 +46,9 @@ public class Pitcher extends Player
 		return era;
 	}
 	
-
+	// Modified toString to include ERA / refines Player toString
+	public String toString()
+	{
+		return super.toString() + "\t" + "ERA" + ":\t" + era;
+	}
 }

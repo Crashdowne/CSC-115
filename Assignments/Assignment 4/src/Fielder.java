@@ -1,4 +1,9 @@
-
+/*
+ * Fielder 
+ * Bryan Kesteloo
+ * V00178963
+ * 
+ */
 //Fielder class for any field position baseball player
 public class Fielder extends Player
 {
@@ -41,6 +46,10 @@ public class Fielder extends Player
 		return battingAvg;
 	}
 
-	
+	// Modified toString to include batting average / refines Player toString
+	public String toString()
+	{
+		return super.toString() + "\t" + "Batting Avg" + ":\t" + battingAvg;
+	}
 	
 }

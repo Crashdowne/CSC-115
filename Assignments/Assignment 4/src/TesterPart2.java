@@ -113,7 +113,7 @@ public class TesterPart2
 		List<Player> correctSL = PlayerAnalysisSoln.makeShortDraftList(fCorrect, pCorrect);
 		List<Player> resultSL = PlayerAnalysis.makeShortDraftList(fResult, pResult);
 		ListOperations.printList(correctSL);
-
+		ListOperations.printList(resultSL);
 		
 		displayResults(resultSL!=null && resultSL.size() == correctSL.size());
 		
