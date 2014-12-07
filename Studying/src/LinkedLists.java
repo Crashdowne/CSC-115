@@ -3,10 +3,8 @@ import java.util.*;
 
 public class LinkedLists {
 	
-	public static void main(String[] args)
-	{
-		LinkedList ll = new LinkedList();
-	}
+	private int size;
+	private LLNode <T> head;
 
 	public static void insert()
 	{
