@@ -4,7 +4,7 @@ public class TestGenericLL
 {
 	public static void main(String[] args)
 	{
-		LLInterface<Integer> s1 = new LLStudying<Integer>();
+		LL<Integer> s1 = new LLStudying<Integer>();
 		s1.insertFront(1);
 		s1.insertFront(2);
 		s1.insertFront(3);

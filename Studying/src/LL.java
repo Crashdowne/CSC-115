@@ -1,5 +1,5 @@
 
-public interface LLInterface<T>
+public interface LL<T>
 {
 	int size();
 	boolean empty();

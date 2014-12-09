@@ -1,12 +1,13 @@
 import java.util.*;
 
 
-public class LLStudying <T> implements LLInterface <T> 
+public class LLGeneric <T> implements LL <T> 
 {
 	
 	private int size = 0;
 	private LLNode <T> head;
 	private LLNode <T> tail;
+	private LLNode <T> next;
 
 	public int size()
 	{
@@ -107,5 +108,16 @@ public class LLStudying <T> implements LLInterface <T>
 		}
 		prev.setNext(prev.getNext());
 		tail = prev;
+	}
+	
+	public String toString(T data)
+	{
+		String s = "[ ";
+		while (head.getNext() != null)
+		{
+			s += (data + ", ");
+		}
+		
+		return s;
 	}
 }

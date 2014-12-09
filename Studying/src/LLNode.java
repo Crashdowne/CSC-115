@@ -37,29 +37,24 @@ public class LLNode <T> {
 		return this.head;
 	}
 	
-	public void setData(T newData)
+	public LLNode<T> getNext()
 	{
-		this.data = newData;
+		return this.next;
 	}
 	
-	public void setTail(LLNode<T> newTail)
+	public void setTail (LLNode<T> newTail)
 	{
-		this.head = newTail;
+		this.tail = newTail;
 	}
 	
-	public void setHead(LLNode<T> newHead)
+	public void setHead (LLNode<T> newHead)
 	{
 		this.head = newHead;
 	}
 	
-	public void setNext(LLNode<T> newNext)
+	public void setNext (LLNode<T> newNext)
 	{
 		this.next = newNext;
-	}
-	
-	public LLNode<T> getNext()
-	{
-		return this.next;
 	}
 	
 	public String toString()
